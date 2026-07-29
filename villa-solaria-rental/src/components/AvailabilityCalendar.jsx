@@ -103,32 +103,50 @@ export default function AvailabilityCalendar({ initialHouseId, onSelectDateAndHo
               </div>
             </div>
             <h2 className="font-serif" style={{ fontSize: '1.8rem', color: 'var(--text-main)' }}>
-              Check Free & Booked Dates
+              Availability Calendar — <span style={{ color: 'var(--terracotta)' }}>{selectedHouse.name}</span>
             </h2>
           </div>
 
-          {/* House Selector Tabs */}
-          <div style={{ display: 'flex', gap: '8px' }}>
-            {villasData.map(h => (
-              <button
-                key={h.id}
-                onClick={() => setSelectedHouseId(h.id)}
-                style={{
-                  padding: '8px 14px',
-                  borderRadius: '50px',
-                  fontSize: '0.82rem',
-                  fontWeight: '600',
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: selectedHouseId === h.id ? 'var(--terracotta)' : 'var(--sand-beige)',
-                  color: selectedHouseId === h.id ? '#FFF' : 'var(--text-main)',
-                  transition: 'var(--transition)'
-                }}
-              >
-                {h.name}
-              </button>
-            ))}
-          </div>
+          {/* Show house switcher tabs ONLY if not opened for a specific house */}
+          {!initialHouseId ? (
+            <div style={{ display: 'flex', gap: '8px' }}>
+              {villasData.map(h => (
+                <button
+                  key={h.id}
+                  onClick={() => setSelectedHouseId(h.id)}
+                  style={{
+                    padding: '8px 14px',
+                    borderRadius: '50px',
+                    fontSize: '0.82rem',
+                    fontWeight: '600',
+                    border: 'none',
+                    cursor: 'pointer',
+                    background: selectedHouseId === h.id ? 'var(--terracotta)' : 'var(--sand-beige)',
+                    color: selectedHouseId === h.id ? '#FFF' : 'var(--text-main)',
+                    transition: 'var(--transition)'
+                  }}
+                >
+                  {h.name}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div style={{ 
+              padding: '8px 18px', 
+              borderRadius: '50px', 
+              background: 'linear-gradient(135deg, #E07A5F 0%, #D97706 100%)', 
+              color: '#FFF', 
+              fontWeight: '700', 
+              fontSize: '0.9rem',
+              boxShadow: '0 4px 12px rgba(224, 122, 95, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              <Home size={16} />
+              <span>{selectedHouse.name}</span>
+            </div>
+          )}
         </div>
 
         <div style={{ padding: '28px 32px' }}>
