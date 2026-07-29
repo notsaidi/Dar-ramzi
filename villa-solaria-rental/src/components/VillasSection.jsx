@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { Bed, Sofa, Utensils, Bath, Users, ArrowRight, ChevronLeft, ChevronRight, X, Image as ImageIcon } from 'lucide-react';
 import { villasData } from '../data/villasData';
 
-const photoLabels = {
-  '/images/terrace.jpg': 'Terrace & Entrance',
-  '/images/bedroom.jpg': 'Bedroom with 2 Beds',
-  '/images/kitchen.jpg': 'Fully Equipped Kitchen',
-  '/images/bathroom.jpg': 'Bathroom with Washing Machine',
+const getPhotoLabel = (path) => {
+  if (!path) return 'House Photo';
+  if (path.includes('terrace.jpg')) return 'Terrace & Entrance';
+  if (path.includes('bedroom.jpg')) return 'Bedroom with 2 Beds';
+  if (path.includes('kitchen.jpg')) return 'Fully Equipped Kitchen';
+  if (path.includes('bathroom.jpg')) return 'Bathroom with Washing Machine';
+  return 'House Photo';
 };
 
 function PhotoGalleryModal({ photos, startIndex, onClose }) {
@@ -30,7 +32,7 @@ function PhotoGalleryModal({ photos, startIndex, onClose }) {
 
         <img
           src={photos[idx]}
-          alt={photoLabels[photos[idx]] || 'House photo'}
+          alt={getPhotoLabel(photos[idx])}
           style={{ width: '100%', height: '70vh', objectFit: 'contain', display: 'block' }}
         />
 
@@ -46,7 +48,7 @@ function PhotoGalleryModal({ photos, startIndex, onClose }) {
           </button>
 
           <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', fontWeight: 600 }}>
-            {photoLabels[photos[idx]] || `Photo ${idx + 1}`} — {idx + 1} / {photos.length}
+            {getPhotoLabel(photos[idx])} — {idx + 1} / {photos.length}
           </span>
 
           <button onClick={next} style={{
@@ -101,7 +103,7 @@ export default function VillasSection({ onOpenBooking }) {
                   <img
                     key={i}
                     src={photo}
-                    alt={photoLabels[photo] || `Photo ${i + 1}`}
+                    alt={getPhotoLabel(photo)}
                     onClick={() => setGalleryState({ photos: villa.photos, startIndex: i })}
                     style={{
                       width: 56, height: 42, objectFit: 'cover', borderRadius: 6,

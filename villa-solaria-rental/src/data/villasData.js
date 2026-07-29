@@ -1,22 +1,25 @@
 // Property photos mapping
-// HOW TO ADD / CHANGE PHOTOS:
-// 1. Place your image files in: public/images/
-// 2. Add or update the file paths below (e.g. '/images/my_photo.jpg')
+const getImagePath = (path) => {
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  const base = import.meta.env.BASE_URL || '/';
+  return base.endsWith('/') ? `${base}${cleanPath}` : `${base}/${cleanPath}`;
+};
+
 export const propertyPhotos = {
-  cover: '/images/terrace.jpg',
-  pool: '/images/pool.jpg',
-  bedroom: '/images/bedroom.jpg',
-  kitchen: '/images/kitchen.jpg',
-  bathroom: '/images/bathroom.jpg',
-  terrace: '/images/terrace.jpg',
+  cover: getImagePath('images/terrace.jpg'),
+  pool: getImagePath('images/pool.jpg'),
+  bedroom: getImagePath('images/bedroom.jpg'),
+  kitchen: getImagePath('images/kitchen.jpg'),
+  bathroom: getImagePath('images/bathroom.jpg'),
+  terrace: getImagePath('images/terrace.jpg'),
 };
 
 // House photos gallery (Pool photo removed from house pictures as requested)
 export const housePhotos = [
-  '/images/terrace.jpg',
-  '/images/bedroom.jpg',
-  '/images/kitchen.jpg',
-  '/images/bathroom.jpg'
+  getImagePath('images/terrace.jpg'),
+  getImagePath('images/bedroom.jpg'),
+  getImagePath('images/kitchen.jpg'),
+  getImagePath('images/bathroom.jpg')
 ];
 
 export const resortInfo = {
@@ -60,7 +63,7 @@ export const villasData = [
       "Direct Shared Resort Pool Access"
     ],
     accentColor: "#E07A5F",
-    image: '/images/terrace.jpg',
+    image: getImagePath('images/terrace.jpg'),
     photos: housePhotos
   },
   {
@@ -85,7 +88,7 @@ export const villasData = [
       "Direct Shared Resort Pool Access"
     ],
     accentColor: "#F4A261",
-    image: '/images/bedroom.jpg',
+    image: getImagePath('images/bedroom.jpg'),
     photos: housePhotos
   },
   {
@@ -110,7 +113,7 @@ export const villasData = [
       "Direct Shared Resort Pool Access"
     ],
     accentColor: "#00B4D8",
-    image: '/images/kitchen.jpg',
+    image: getImagePath('images/kitchen.jpg'),
     photos: housePhotos
   },
   {
@@ -135,7 +138,7 @@ export const villasData = [
       "Direct Shared Resort Pool Access"
     ],
     accentColor: "#2D3142",
-    image: '/images/bathroom.jpg',
+    image: getImagePath('images/bathroom.jpg'),
     photos: housePhotos
   }
 ];
