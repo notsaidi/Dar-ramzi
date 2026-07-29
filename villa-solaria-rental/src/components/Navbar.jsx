@@ -41,16 +41,6 @@ export default function Navbar({ onOpenBooking, onOpenAdmin, onOpenCalendar }) {
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
         <button 
           className="btn-secondary" 
-          onClick={onOpenCalendar}
-          title="View Free vs Booked Dates"
-          style={{ padding: '10px 16px', fontSize: '0.8rem' }}
-        >
-          <Calendar size={16} />
-          <span>Calendar</span>
-        </button>
-
-        <button 
-          className="btn-secondary" 
           onClick={onOpenAdmin}
           title="View Host Admin Reservations"
           style={{ padding: '10px 16px', fontSize: '0.8rem' }}

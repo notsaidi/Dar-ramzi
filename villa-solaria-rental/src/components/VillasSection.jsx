@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Bed, Sofa, Utensils, Bath, Users, ArrowRight, ChevronLeft, ChevronRight, X, Image as ImageIcon } from 'lucide-react';
+import { Bed, Sofa, Utensils, Bath, Users, ArrowRight, ChevronLeft, ChevronRight, X, Image as ImageIcon, Calendar } from 'lucide-react';
 import { villasData } from '../data/villasData';
 
 const getPhotoLabel = (path) => {
@@ -63,7 +63,7 @@ function PhotoGalleryModal({ photos, startIndex, onClose }) {
   );
 }
 
-export default function VillasSection({ onOpenBooking }) {
+export default function VillasSection({ onOpenBooking, onOpenCalendar }) {
   const [galleryState, setGalleryState] = useState(null);
 
   return (
@@ -148,10 +148,20 @@ export default function VillasSection({ onOpenBooking }) {
                 </div>
               </div>
 
-              <div className="villa-card-footer">
+              <div className="villa-card-footer" style={{ display: 'flex', gap: '8px' }}>
+                <button
+                  className="btn-secondary"
+                  style={{ padding: '12px 14px', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
+                  onClick={() => onOpenCalendar(villa)}
+                  title={`View available & booked dates for ${villa.name}`}
+                >
+                  <Calendar size={16} />
+                  <span>Calendar</span>
+                </button>
+
                 <button
                   className="btn-primary"
-                  style={{ width: '100%', padding: '12px 14px', fontSize: '0.9rem' }}
+                  style={{ flex: 1, padding: '12px 14px', fontSize: '0.9rem' }}
                   onClick={() => onOpenBooking(villa)}
                 >
                   <span>Reserve {villa.name}</span>

@@ -14,10 +14,16 @@ export default function GuestPage() {
   const [bookingVilla, setBookingVilla] = useState(null);
   const [initialBookingDates, setInitialBookingDates] = useState(null);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [calendarHouseId, setCalendarHouseId] = useState(null);
 
   const handleOpenBooking = (villa = null, dates = null) => {
     setBookingVilla(villa);
     setInitialBookingDates(dates);
+  };
+
+  const handleOpenCalendar = (villa = null) => {
+    setCalendarHouseId(villa ? villa.id : null);
+    setShowCalendar(true);
   };
 
   const handleCalendarSelect = (house, selectedDate) => {
@@ -39,7 +45,7 @@ export default function GuestPage() {
       <Navbar 
         onOpenBooking={(villa) => handleOpenBooking(villa, null)} 
         onOpenAdmin={() => navigate('/admin')}
-        onOpenCalendar={() => setShowCalendar(true)}
+        onOpenCalendar={() => handleOpenCalendar(null)}
       />
 
       <main>
@@ -49,6 +55,7 @@ export default function GuestPage() {
 
         <VillasSection 
           onOpenBooking={(villa) => handleOpenBooking(villa, null)}
+          onOpenCalendar={(villa) => handleOpenCalendar(villa)}
         />
 
         <PoolSection />
@@ -105,6 +112,7 @@ export default function GuestPage() {
       {/* Modals */}
       {showCalendar && (
         <AvailabilityCalendar 
+          initialHouseId={calendarHouseId}
           onSelectDateAndHouse={handleCalendarSelect}
           onClose={() => setShowCalendar(false)}
         />

@@ -3,8 +3,8 @@ import { ChevronLeft, ChevronRight, Clock, Home, ArrowRight } from 'lucide-react
 import { villasData } from '../data/villasData';
 import { fetchBookings, getTodayStr, getOneMonthAheadStr } from '../firebase/config';
 
-export default function AvailabilityCalendar({ onSelectDateAndHouse, onClose }) {
-  const [selectedHouseId, setSelectedHouseId] = useState(villasData[0].id);
+export default function AvailabilityCalendar({ initialHouseId, onSelectDateAndHouse, onClose }) {
+  const [selectedHouseId, setSelectedHouseId] = useState(initialHouseId || villasData[0].id);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
